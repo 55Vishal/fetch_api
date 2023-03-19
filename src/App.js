@@ -1,25 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState }  from 'react'
 
 function App() {
+  const[data, setData]=useState('')
+
+  function GetAPI(){
+
+    fetch('https://dog.ceo/api/breeds/image/random')
+    .then((resp)=> resp.json())
+    .then((apiData)=>{
+      setData(apiData.message);
+    });
+  }
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  <div>
+  <img src={data} width={600} ></img>
+  <button onClick={GetAPI}>Click here</button>
+  </div>
+  )
 }
 
-export default App;
+export default App
+
